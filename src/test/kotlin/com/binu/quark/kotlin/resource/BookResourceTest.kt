@@ -3,6 +3,7 @@ package com.binu.quark.kotlin.resource
 import com.binu.quark.kotlin.TransactionalQuarkusTest
 import com.binu.quark.kotlin.domain.Book
 import com.binu.quark.kotlin.domain.TodayResponse
+import io.restassured.builder.ResponseSpecBuilder
 import io.restassured.http.ContentType
 import io.restassured.module.kotlin.extensions.Extract
 import io.restassured.module.kotlin.extensions.Given
@@ -13,12 +14,17 @@ import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.jupiter.api.Test
 import java.time.format.DateTimeFormatter
-import java.time.temporal.TemporalQueries.localDate
 import java.util.*
+
 
 
 @TransactionalQuarkusTest
 class BookResourceTest {
+    var checkStatusCodeAndContentType = ResponseSpecBuilder().
+                                        expectStatusCode(200).
+                                        expectContentType(ContentType.JSON)
+                                        .build()
+
     @Test
     fun getBooks() {
         // expected
@@ -70,8 +76,7 @@ class BookResourceTest {
        } When {
            get("http://date.jsontest.com")
        } Then {
-           statusCode(200)
-           contentType(ContentType.JSON)
+           spec(checkStatusCodeAndContentType)
            body("date", equalTo(todayResponseExpected.date)) //redundant checking; just to give 2 flavors of assert
        } Extract {
             val result: TodayResponse = response().`as`(TodayResponse::class.java)
