@@ -42,6 +42,7 @@ class BookResourceTest {
         } Extract {
             // First get the JsonPath object instance from the Response interface
             val result: Book = response().`as`(Book::class.java)
+            assertThat(result.title, containsString(e1.title))
         }
 
 /*        val widgets = get("/widget")
