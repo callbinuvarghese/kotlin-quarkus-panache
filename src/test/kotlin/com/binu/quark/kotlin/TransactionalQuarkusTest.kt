@@ -1,4 +1,4 @@
-package com.binu.quark.kotlin.repository
+package com.binu.quark.kotlin
 
 import io.quarkus.test.junit.QuarkusTest;
 

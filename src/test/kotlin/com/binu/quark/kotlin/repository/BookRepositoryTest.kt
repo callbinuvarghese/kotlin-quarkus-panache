@@ -1,7 +1,7 @@
 package com.binu.quark.kotlin.repository
 
+import com.binu.quark.kotlin.TransactionalQuarkusTest
 import com.binu.quark.kotlin.domain.Book
-import io.quarkus.test.junit.QuarkusTest
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.*
 import org.junit.jupiter.api.BeforeEach
@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test
 import java.util.*
 import javax.enterprise.inject.Default
 import javax.inject.Inject
-import javax.transaction.Transactional
 
 @TransactionalQuarkusTest
 class BookRepositoryTest() {
